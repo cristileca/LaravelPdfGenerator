@@ -192,6 +192,7 @@
 <body>
     <page size="A4">
         <div class="container">
+            <!-- Right Pannel -->
             <div class="leftPanel">
                 <div class="details">
                     <div class="item">
@@ -249,7 +250,7 @@
 
             <img class="lines" src="{{ public_path('storage/bgLines.png') }}"
             alt="linesOrnament">
-            <!-- Right Panel -->
+            <!-- Left Panel -->
             <div class="rightPanel">
                 <div class="item">
                     <h2>ABOUT THE CANDIDATE</h2>

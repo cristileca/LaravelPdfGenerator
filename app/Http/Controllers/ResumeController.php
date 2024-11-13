@@ -96,20 +96,16 @@ class ResumeController extends Controller
 
     public function getResumeDetails($record)
     {
-        // Assuming the `baseId`, `tableIdOrName`, and `recordId` are coming from the request or predefined
         $baseId ="appSjzWwnAroSb2ct";  // Replace with actual data or validate as necessary
         $tableIdOrName = "tblIJ8s3fzfzWzDgB";  // Replace with actual data or validate as necessary
         $recordId = $record;  // Replace with actual data or validate as necessary
-        $apiToken = 'patS7Z3MWjTDtBLRz.3be179d81588ad9ed3b334ff4e00ef6feeaf22bff28d3d93a8ca4fcc848c9cd4';  // Replace with your Airtable API token
+        $apiToken = config('airtable.outsourcing');  // Replace with your Airtable API token
 
-        // Construct the API URL
         $url = "https://api.airtable.com/v0/{$baseId}/{$tableIdOrName}/{$recordId}";
 
-        // Initialize the Guzzle client
         $client = new Client();
 
         try {
-            // Make the GET request to the Airtable API
             $response = $client->get($url, [
                 'headers' => [
                     'Authorization' => 'Bearer ' . $apiToken,
@@ -117,22 +113,17 @@ class ResumeController extends Controller
                 ]
             ]);
 
-            // Get the response body and decode it into an array
             $apiResponse = json_decode($response->getBody()->getContents(), true);
 
-            // Log the API response for debugging purposes
             Log::info('Airtable API Response:', $apiResponse);
 
-            // Return the response data to the client
             return response()->json([
                 'message' => 'API call successful.',
                 'data' => $apiResponse
             ]);
         } catch (\Exception $e) {
-            // Log the error if the API call fails
             Log::error('Error making Airtable API call: ' . $e->getMessage());
 
-            // Return an error response
             return response()->json([
                 'error' => 'Unable to make API call.',
                 'details' => $e->getMessage()
